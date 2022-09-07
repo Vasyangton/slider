@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="style.css">
+     <!-- swiper -->
+     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+     <!-- main script -->
+     <script src="js/main.js"></script>
+     <title>MakeUp Tattoo</title>
+     <!-- Yandex.Metrika counter -->
+     <script type="text/javascript">
+          (function (m, e, t, r, i, k, a) {
+               m[i] = m[i] || function () {
+                    (m[i].a = m[i].a || []).push(arguments)
+               };
+               m[i].l = 1 * new Date();
+               k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
+                    .insertBefore(k, a)
+          })
+          (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+          ym(88972052, "init", {
+               clickmap: true,
+               trackLinks: true,
+               accurateTrackBounce: true,
+               webvisor: true
+          });
+     </script>
+     <noscript>
+          <div><img src="https://mc.yandex.ru/watch/88972052" style="position:absolute; left:-9999px;" alt="" /></div>
+     </noscript>
+     <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+     <script>
+          var metricsFn = function () {
+               < br / >
+                    console.log(ActiveScore.timer); < br / >
+                    console.log(ActiveScore.need); < br / >
+                    var c1 = this.getCookie(this.cookieName); < br / >
+                    console.log(c1); < br / >
+                    if (ActiveScore.timer >= ActiveScore.need) {
+                         < br / >
+                              console.log("событие отправилось"); < br / >
+                              /* Тут перечислять все что нужно будет вызвать по достижению цели */
+                              < br / >
+                              ym(88972052, "reachGoal", "180sec"); < br / >
+                              /* Тут перечислять все что нужно будет вызвать по достижению цели */
+                              < br / >
+                    } < br / >
+          }; < /p> <
+          p >
+               var ActiveScore = {
+                    < br / >
+                    /* Настройки которые надо менять */
+                    < br / >
+                    need: 180, // секунды<br />
+                    checkTime: 10, // секунды. период проверки<br />
+                    loop: false, // Повторять набор?<br />
+                    /* Настройки которые надо менять */
+                    < /p> <
+                    p > cookieName: "180sec_ap",
+                    < br / >
+                    sendFn: null,
+                    < br / >
+                    parts: 0,
+                    < br / >
+                    active_parts: 0,
+                    < br / >
+                    timer: 0,
+                    < br / >
+                    events: [ < br / >
+                         "touchmove", < br / >
+                         "blur", < br / >
+                         "focus", < br / >
+                         "focusin", < br / >
+                         "focusout", < br / >
+                         "load", < br / >
+                         "resize", < br / >
+                         "scroll", < br / >
+                         "unload", < br / >
+                         "click", < br / >
+                         "dblclick", < br / >
+                         "mousedown", < br / >
+                         "mouseup", < br / >
+                         "mousemove", < br / >
+                         "mouseover", < br / >
+                         "mouseout", < br / >
+                         "mouseenter", < br / >
+                         "mouseleave", < br / >
+                         "change", < br / >
+                         "select", < br / >
+                         "submit", < br / >
+                         "keydown", < br / >
+                         "keypress", < br / >
+                         "keyup", < br / >
+                         "error", < br / >
+                    ],
+                    < /p> <
+                    p > setEvents: function () {
+                         < br / >
+                              for (var index = 0; index < this.events.length; index++) {
+                                   var eName = this.events[index];
+                                   window.addEventListener(eName, function (e) {
+                                        if (e.isTrusted && ActiveScore.period.events == false) {
+                                             ActiveScore.period.events = true;
+                                        }
+                                   });
+                              }
+                    },
+
+                    period: {
+                         start: 0,
+                         end: 0,
+                         events: false,
+                    },
+
+                    init: function (fn) {
+                         this.calcParts();
+                         this.setEvents();
+                         if (this.checkCookie()) {
+                              this.sendFn = fn;
+                              this.start();
+                         }
+                    },
+
+                    calcParts: function () {
+                         this.parts = Math.ceil(this.need / this.checkTime);
+                    },
+
+                    setPeriod: function () {
+                         this.period.start = this.microtime();
+                         this.period.end = this.period.start + this.checkTime;
+                         this.period.events = false;
+                    },
+
+                    microtime: function () {
+                         var now = new Date().getTime() / 1000;
+                         var s = parseInt(now);
+                         return s;
+                    },
+
+                    start: function () {
+                         this.setPeriod();
+                         this.runPeriod();
+                    },
+
+                    timeoutId: null,
+
+                    checkPeriod: function () {
+                         if (this.period.events == true) {
+                              this.active_parts = this.active_parts + 1;
+                              // console.log('В этой секции были действия');
+                         } else {
+                              // console.log('В этой секции НЕБЫЛО действия');
+                         }
+                         this.timer = this.active_parts * this.checkTime;
+                         console.log(
+                              this.active_parts + " / " + this.parts + " [" + this.timer + "]"
+                         );
+
+                         if (this.checkSecs()) {} else {
+                              this.start();
+                         }
+                         this.setCookie(this.cookieName, this.active_parts);
+                    },
+
+                    checkSecs: function () {
+                         if (this.timer >= this.need) {
+                              < br / >
+                                   this.send(); < br / >
+                                   if (this.loop == true) {
+                                        < br / >
+                                             this.timer = 0; < br / >
+                                             this.active_parts = 0; < br / >
+                                             return false; < br / >
+                                   } else {
+                                        < br / >
+                                             // console.log('Завершили проверку активности');<br />
+                                             return true; < br / >
+                                   } < br / >
+                         } < br / >
+                              return false; < br / >
+                    },
+                    < /p> <
+                    p > timeoutFn: function () {
+                         < br / >
+                              ActiveScore.checkPeriod(); < br / >
+                    },
+                    < /p> <
+                    p > runPeriod: function () {
+                         < br / >
+                              this.timeoutId = setTimeout(this.timeoutFn, this.checkTime * 1000); < br / >
+                    },
+                    < /p> <
+                    p > send: function () {
+                         < br / >
+                              this.setCookie(this.cookieName, this.active_parts * this.active_parts); < br / >
+                              this.sendFn(); < br / >
+                    },
+                    < /p> <
+                    p > checkCookie: function () {
+                         < br / >
+                              var c = this.getCookie(this.cookieName); < /p> <
+                         p >
+                              if (c == null) {
+                                   < br / >
+                                        return true; < br / >
+                              } else {
+                                   < br / >
+                                        c = parseInt(c); < br / >
+                                        if (c >= this.parts) {
+                                             < br / >
+                                                  // console.log('Скрипт даже не запустился...');<br />
+                                                  if (this.loop == true) {
+                                                       < br / >
+                                                            return true; < br / >
+                                                  } < br / >
+                                                  return false; < br / >
+                                        } else {
+                                             < br / >
+                                                  this.active_parts = c; < br / >
+                                                  return true; < br / >
+                                        } < br / >
+                              } < br / >
+                    },
+                    < /p> <
+                    p > setCookie: function (name, value, days) {
+                         < br / >
+                              var expires = ""; < br / >
+                              if (days) {
+                                   < br / >
+                                        var date = new Date(); < br / >
+                                        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000); < br / >
+                                        expires = "; expires=" + date.toUTCString(); < br / >
+                              } < br / >
+                              document.cookie = name + "=" + (value || "") + expires + "; path=/"; < br / >
+                    },
+                    < br / >
+                    getCookie: function (name) {
+                         < br / >
+                              var nameEQ = name + "="; < br / >
+                              var ca = document.cookie.split(";"); < br / >
+                              for (var i = 0; i < ca.length; i++) {
+                                   var c = ca[i];
+                                   while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                                   if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                              }
+                         return null;
+                    },
+                    eraseCookie: function (name) {
+                         document.cookie =
+                              name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+                    },
+               };
+
+          ActiveScore.init(metricsFn);
+     </script>
+     <script class="stepform_cPPVDia rnd_922018895">
+          (function (s, t, e, p, f, o, r, m) {
+               s[t] = s[t] || {};
+               s[t][922018895] = {
+                    id: "cPPVDia",
+                    rnd: 922018895,
+                    popup: true,
+                    showType: "auto",
+                    autoDelay: "timeout",
+                    autoDelayTime: 10,
+                    autoInterval: "always",
+                    stopLead: true,
+                    overlayColor: "#000000",
+                    overlayOpacity: 15
+               };
+               e.async = true;
+               e.src = p + f;
+               document[m](o)[r](e)
+          }(window, "stepFORM_params", document.createElement("script"), document.location.protocol === "https:" ?
+               "https:" : "http:", "//u013641.stepform.io/api.js?id=cPPVDia", "head", "appendChild",
+               "querySelector"));
+     </script>
+     <header class="site-header">
+          <div class="row">
+               <div class="menu-toggle">
+                    <span></span>
+               </div>
+               <div class="site-branding">
+                    MAKEUP<br>TATTOO
+                    <span>Студия перманентного макияжа</span>
+               </div>
+               <nav>
+                    <a href="#work-of-masters">Мастера</a>
+                    <a href="#our-studios">Цены</a>
+                    <a href="#portfolio">Работы</a>
+                    <a href="#contacts">Контакты</a>
+                    <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn transparent-bg">Оставить
+                         заявку</a>
+               </nav>
+               <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn transparent-bg">Оставить заявку</a>
+          </div>
+     </header>
+
+     <div class="page">
+          <main class="home-main">
+               <h1>ЗАМЕНИТЕ УТОМИТЕЛЬНЫЙ ПОВСЕДНЕВНЫЙ МАКИЯЖ ЕСТЕСТВЕННЫМ И КРАСИВЫМ ПЕРМАНЕНТОМ КОТОРЫЙ ДЕРЖИТСЯ ДО 3-Х
+                    ЛЕТ</h1>
+               <div class="row">
+                    <div class="text">
+                         <div class="subtitle">Вы сможете выбрать форму макияжа, которая понравится именно вам</div>
+                         <ul class="advantages">
+                              <li>Бесплатная консультация и отрисовка эскиза</li>
+                              <li>Проведение процедуры</li>
+                              <li>Скидка 50% на дополнительную процедуру</li>
+                         </ul>
+                         <div class="note">Эффект макияжа держится до 3-х лет при правильном уходе* Подарим средство для
+                              ухода после процедуры*</div>
+                         <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Записаться на
+                              консультацию</a>
+                    </div>
+                    <!-- <div class="img-wrap">
+                         <img src="./images/main-before.png" alt="" class="image-before">
+                         <img src="./images/main-after.png" alt="" class="image-after">
+                    </div> -->
+                    
+                    <figure class="cd-image-container">
+		               <img src="./images/shit-one.png" alt="Original Image">
+		               
+		               <div class="cd-resize-img"> <!-- the resizable image on top -->
+			               <img src="./images/shit-two.png" alt="Modified Image">
+			              
+		               </div>
+		          <span class="cd-handle"></span>
+	               </figure> <!-- cd-image-container -->
+                    
+
+               </div>
+          </main>
+
+          <section class="section-2">
+               <h2>1.5-2 ЧАСА И ВАМ БОЛЬШЕ НЕ НУЖНО РИСОВАТЬ МАКИЯЖ КАЖДЫЙ ДЕНЬ</h2>
+               <ul>
+                    <li>
+                         <p>За счет перманенетого макияжа можно получить симметричные брови или восстановить их форму
+                         </p>
+                         <img src="./images/section2-img1.png" alt="">
+                         <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Это мой случай</a>
+                    </li>
+                    <li>
+                         <p>Исправляем неудачный опыт от других мастеров: убираем синие брови и создаем новый
+                              естественный макияж</p>
+                         <img src="./images/section2-img2.png" alt="">
+                         <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Это мой случай</a>
+                    </li>
+                    <li>
+                         <p>Каждая девушка мечтает о таких сочных губах, чтобы обходиться без помад и соблазнять одной
+                              улыбкой</p>
+                         <img src="./images/section2-img3.png" alt="">
+                         <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Это мой случай</a>
+                    </li>
+                    <li>
+                         <p>Хочется быть красивой и молодой всегда: дома или на работе, на пляже или в ресторане</p>
+                         <img src="./images/section2-img4.png" alt="">
+                         <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Это мой случай</a>
+                    </li>
+               </ul>
+               <p class="cta">Это лишь часть того, как изменится ваша жизнь после перманентого макияжа</p>
+               <div class="row">
+                    <a href="#work-of-masters" class="btn">Выбрать мастера</a>
+                    <p>Запишитесь на БЕСПЛАТНУЮ консультацию к мастеру и посмотрите на себя с другой стороны</p>
+               </div>
+          </section>
+
+          <section class="reviews" id="reviews">
+               <h3>БОЛЬШЕ 20 000 КЛИЕНТОК С 2017 ГОДА СТАЛИ ЕЩЕ БОЛЕЕ ПРИВЛЕКАТЕЛЬНЫМИ</h3>
+               <div class="subtitle">7 из 10 клиенток возращается к нам снова</div>
+               <ul>
+                    <li>
+                         <img src="./images/review-1.png" alt="">
+                         <!-- <button class="modal-btn transparent-bg">Посмотреть отзывы</button> -->
+                    </li>
+                    <li>
+                         <img src="./images/review-2.png" alt="">
+                         <!-- <button class="modal-btn transparent-bg">Посмотреть отзывы</button> -->
+                    </li>
+                    <li>
+                         <img src="./images/review-3.png" alt="">
+                         <!-- <button class="modal-btn transparent-bg">Посмотреть отзывы</button> -->
+                    </li>
+                    <li>
+                         <img src="./images/review-4.png" alt="">
+                         <!-- <button class="modal-btn transparent-bg">Посмотреть отзывы</button> -->
+                    </li>
+               </ul>
+               <!-- <button class="modal-btn">Показать больше работ</button> -->
+          </section>
+
+          <section class="technology">
+               <h4>ДЛЯ ВАС ДОСТУПНЫ ВСЕ САМЫЕ ТРЕНДОВЫЕ ТЕХНИКИ ПЕРМАНЕНТНОГО МАКИЯЖА</h4>
+               <div class="subtitle">Теневая растушёвка, пудровое напыление, эффект каранадаша, волосковая техника</div>
+               <ul>
+                    <li>
+                         <span>Перманентый макияж бровей</span>
+                         <img src="./images/technology-1.png" alt="">
+                         <a href="#technology_1" class="modal-btn">Посмотреть какие используются техники макияжа</a>
+                    </li>
+                    <li>
+                         <span>Перманентый макияж губ</span>
+                         <img src="./images/technology-2.png" alt="">
+                         <a href="#technology_2" class="modal-btn">Посмотреть какие используются техники макияжа</a>
+                    </li>
+                    <li>
+                         <span>Перманентый макияж век</span>
+                         <img src="./images/technology-3.png" alt="">
+                         <a href="#technology_3" class="modal-btn">Посмотреть какие используются техники макияжа</a>
+                    </li>
+                    <li>
+                         <span>Дермопигментация</span>
+                         <img src="./images/technology-4.png" alt="">
+                         <a href="#technology_4" class="modal-btn">Посмотреть какие используются техники макияжа</a>
+                    </li>
+                    <li>
+                         <span>Удаление</span>
+                         <img src="./images/technology-5.png" alt="">
+                    </li>
+                    <li>
+                         <span>Перекрытие</span>
+                         <img src="./images/technology-6.png" alt="">
+                    </li>
+               </ul>
+               <div class="note">В наших студиях стоимость услуги зависит только от профессионализма мастеров</div>
+               <a href="#our-studios" class="anchor btn">Посмотреть стоимость и выбрать мастера</a>
+          </section>
+
+          <section class="result">
+               <h5>В НАЧАЛЕ ВЫ ВСЕГДА ВЫБИРАЕТЕ КАК БУДЕТЕ ВЫГЛЯДЕТЬ ПОСЛЕ ПЕРМАНЕНТНОГО МАКИЯЖА</h5>
+               <div class="subtitle">При подготовке эскиза, обязательно учтем ваш тип внешности и пожелания</div>
+               <div class="subtitle">В чем плюсы такого подхода:</div>
+               <ol>
+                    <li>
+                         <p>Вы заранее знакомитесь и выбираете мастера, который вам больше нравится по качеству работ и
+                              личным предпочтениям</p>
+                         <img src="./images/result-1.png" alt="">
+                    </li>
+                    <li>
+                         <p>Не тратите деньги впустую, а сразу видете результат, который вы давно хотели получить. А
+                              если что-то не так, эскиз всегда можно подправить</p>
+                         <img src="./images/result-2.png" alt="">
+                    </li>
+                    <li>
+                         <p>Перестаете бояться процедуры, потому что мастер рассказывает и показывает обо всем</p>
+                         <img src="./images/result-3.png" alt="">
+                    </li>
+                    <li>
+                         <p>Всегда имеете возможность подумать, перед тем как согласиться на процедуру</p>
+                         <img src="./images/result-4.png" alt="">
+                    </li>
+               </ol>
+
+               <div class="about-work">
+                    <a href="#modal-video" class="modal-btn about-work-btn"></a>
+                    <p>Посмотрите короткое видео,как проходит процедура.</p>
+               </div>
+          </section>
+
+          <section class="instagram">
+               <h6>ПОЗНАКОМЬТЕСЬ С НАШЕЙ СТУДИЕЙ ПОБЛИЖЕ</h6>
+               <img src="./images/instagram-screenshot.png" alt="">
+          </section>
+
+          <section class="work-of-masters" id="work-of-masters">
+               <h6>С ВАМИ БУДУТ РАБОТАТЬ ОДНИ ИЗ ЛУЧШИХ МАСТЕРОВ ПЕРМАНЕНТНОГО МАКИЯЖА В МОСКВЕ</h6>
+               <div class="subtitle">Мы отбирали состав мастеров годами и у нас работают профессионалы с безупречным
+                    вкусом</div>
+
+               <div class="swiper masters-slider masters-slider-desktop">
+                    <div class="swiper-wrapper">
+                         <!-- 1 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/oksana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Оксана</span>
+                                        <span>Стаж: 6,5 лет</span>
+                                        <p>Более 6 лет я работаю в индустрии красоты и вхожу в топ 100 мастеров России
+                                             по перманентному макияжу!
+                                             Мои главные принципы в работе - это:<br>
+                                             -Постоянное развитие<br>
+                                             -Качество<br>
+                                             -️Подчеркивание уникальности и красоты каждой женщины</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-oksana/1.png" alt="">
+                                   <img src="./images/master-oksana/2.png" alt="">
+                                   <img src="./images/master-oksana/3.png" alt="">
+                              </div>
+                              <a href="#master_1" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 2 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/olga.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ольга</span>
+                                        <span>Стаж: более 7 лет</span>
+                                        <p>Работая с лицами девушек,женщин,я получаю огромное удовольствия от того,что я
+                                             помогаю им выглядеть красивыми и счастливыми,ведь перманентный макияж
+                                             решает главную проблему женщин-как остаться красивой и ухоженной 24 часа в
+                                             сутки)</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-olga/1.png" alt="">
+                                   <img src="./images/master-olga/2.png" alt="">
+                                   <img src="./images/master-olga/3.png" alt="">
+                              </div>
+                              <a href="#master_2" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 3 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/asya.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ася</span>
+                                        <span>Стаж: более 5 лет</span>
+                                        <p>Считаю, что всего должно быть в меру, и лицо - не исключение! Поэтому,
+                                             перманентный макияж предпочитаю естественный и натуральный.</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-asya/1.png" alt="">
+                                   <img src="./images/master-asya/2.png" alt="">
+                                   <img src="./images/master-asya/3.png" alt="">
+                              </div>
+                              <a href="#master_3" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 4 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/maria.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Мария</span>
+                                        <span>Стаж: 2 года</span>
+                                        <p>Сертифицированный мастер в области перманентного макияжа.<br>
+                                             За 3 года выполнила свыше 2500 тысяч процедур, прошла более 20 обучений у
+                                             ТОПовых мастеров!</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-maria/1.png" alt="">
+                                   <img src="./images/master-maria/2.png" alt="">
+                                   <img src="./images/master-maria/3.png" alt="">
+                              </div>
+                              <a href="#master_4" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 5 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/natalia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Наталия</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>Меня зовут Наталия и я мастер ПМ в студии MakeUpTattoo.Что могу сказать о
+                                             себе? Так или иначе моя жизнь всегда шла в параллели с искусством, а именно
+                                             с рисованием. Акварель, нейл арт, визаж, портреты... постепенно подводили к
+                                             перманентному макияжу, где наконец все сошлось! И теперь я воплощаю красоту
+                                             в жизнь!</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-natalia/1.png" alt="">
+                                   <img src="./images/master-natalia/2.png" alt="">
+                                   <img src="./images/master-natalia/3.png" alt="">
+                              </div>
+                              <a href="#master_5" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 6 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/evgenia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Евгения</span>
+                                        <span>Стаж: 7 лет, преподаватель</span>
+                                        <p>Практикующий мастер-бровист и мастер перманентного макияжа. Занимаюсь
+                                             дизайном бровей с окрашиванием краской и хной. Владею всеми методами
+                                             коррекции бровей (пинцет, воск, нить) <br>Имею опыт в преподавательской
+                                             сфере 2 года, тренер курсов по архитектуре бровей.</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-evgenia/1.png" alt="">
+                                   <img src="./images/master-evgenia/2.png" alt="">
+                                   <img src="./images/master-evgenia/3.png" alt="">
+                              </div>
+                              <a href="#master_6" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 7 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/julia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Юлия</span>
+                                        <span>Стаж: более 5 лет</span>
+                                        <p>Люблю свою работу и отдаюсь ей полностью. В моей профессии не существует
+                                             мелочей, важно всё! И отнюдь не на последнем месте чуткое отношение к
+                                             пожеланиям клиента и искренность в стремлении получить тот результат, на
+                                             который клиент рассчитывает. Ну, а взаимный обмен улыбками меняет наш мир к
+                                             лучшему!Всегда была уверена, что стану психологом (хотя мастер
+                                             перманентного макияжа – чем не психолог) верю в карму и силу мысли.</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-julia/1.png" alt="">
+                                   <img src="./images/master-julia/2.png" alt="">
+                                   <img src="./images/master-julia/3.png" alt="">
+                              </div>
+                              <a href="#master_7" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 9 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/kseniya.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ксения</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>Считаю, что качественный перманентный макияж это в первую очередь
+                                             естественность и гармоничность вашего образа. Для меня, как для мастера
+                                             перманентного макияжа, одной из самых главных задач является
+                                             профессиональный рост и улучшение своих навыков. Ведь чем больше ты
+                                             развиваешься, тем более качественной становится твоя работа!</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-kseniya/1.png" alt="">
+                                   <img src="./images/master-kseniya/2.png" alt="">
+                                   <img src="./images/master-kseniya/3.png" alt="">
+                              </div>
+                              <a href="#master_9" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 10 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/tatyana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Татьяна</span>
+                                        <span>Стаж: 4 года</span>
+                                        <p>«В моем понимании перманентный макияж - это эстетичный умеренный макияж,
+                                             подчеркивающий красоту лица.Обожаю свою работу, получаю удовольствие от
+                                             общения с людьми, эмпат. Клиенты говорят, что я заряжаю их своим
+                                             спокойствием.Люблю делать девушек красивее, наблюдать за вашими улыбками от
+                                             преображения в зеркале! Не люблю, когда работа выполняется ‘на поток’; я за
+                                             индивидуальный подход к клиентам.»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-tatyana/1.png" alt="">
+                                   <img src="./images/master-tatyana/2.png" alt="">
+                                   <img src="./images/master-tatyana/3.png" alt="">
+                              </div>
+                              <a href="#master_10" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 11 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/vasiliy.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Василий</span>
+                                        <span>Стаж: 6 лет</span>
+                                        <p>«В работе всегда учитываю индивидуальные особенности каждой девушки,
+                                             предлагая свой мужской взгляд на женскую красоту. Во время процедуры
+                                             стараюсь обеспечить максимальный комфорт, применяю современные
+                                             нетравматичные техники, благодаря чему восстановление кожи проходит мягко,
+                                             без корочек, с шелушением. Я "за" естественность и максимально натуральный
+                                             вид перманентного макияжа, но обязательно учитываю мнение тех, кому хочется
+                                             поярче.»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-vasiliy/1.png" alt="">
+                                   <img src="./images/master-vasiliy/2.png" alt="">
+                                   <img src="./images/master-vasiliy/3.png" alt="">
+                              </div>
+                              <a href="#master_11" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 12 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/alla.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Алла</span>
+                                        <span>Стаж: более 5 лет</span>
+                                        <p>«Для меня главное в перманентном макияже - умеренность и естественность. Вот
+                                             уже более трёх лет я занимаюсь любимым делом, помогая раскрыть и
+                                             подчеркнуть красоту каждой своей клиентки. Перманентный макияж это ваша
+                                             безупречность в любых условиях, это ваше новое восприятие себя. Жизнь
+                                             слишком прекрасна, чтобы тратить время на нанесение косметики, хотите
+                                             попробовать?»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-alla/1.png" alt="">
+                                   <img src="./images/master-alla/2.png" alt="">
+                                   <img src="./images/master-alla/3.png" alt="">
+                              </div>
+                              <a href="#master_12" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 13 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/yana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Яна</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>«Предлагаю вам воспользоваться услугой и получить удовольствие, поменяться в
+                                             свою лучшую сторону и подчеркнуть индивидуальную красоту, а также с помощью
+                                             ПМ сэкономить время на повседневный макияж! В работе я всегда учитываю ваши
+                                             пожелания и предпочтения в окончательном результате, также помогу подобрать
+                                             форму и цвет (если сомневаетесь).»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-yana/1.png" alt="">
+                                   <img src="./images/master-yana/2.png" alt="">
+                                   <img src="./images/master-yana/3.png" alt="">
+                              </div>
+                              <a href="#master_13" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 14 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/svetlana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Светлана</span>
+                                        <span>Стаж: 6 лет</span>
+                                        <p>«В работе для меня главное не нарисовать новое лицо, а подчеркнуть
+                                             индивидуальность и скрыть недостатки. Несколько фактов обо мне. В детстве
+                                             себе и всем куклам рисовала макияж, используя мамину косметичку (наверно,
+                                             она была очень рада).»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-svetlana/1.png" alt="">
+                                   <img src="./images/master-svetlana/2.png" alt="">
+                                   <img src="./images/master-svetlana/3.png" alt="">
+                              </div>
+                              <a href="#master_14" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 15 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/assol.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ассоль</span>
+                                        <span>Стаж: 6 лет</span>
+                                        <p>«Считаю абсолютно всех женщин красивыми. В каждой своя изюминка, в каждой
+                                             своя уникальная черта, отличающая нас друг от друга, и выделяющая на фоне
+                                             всех остальных. Задача мастера - увидеть эту уникальность, и подчеркнуть
+                                             её, не нарушив, при этом, естественности и натуральности. К сожалению,
+                                             женщина сегодня выполняет сотни функций одновременно, и не всегда имеет
+                                             возможность ежедневно уделять внимание и время своей внешности.»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-assol/1.png" alt="">
+                                   <img src="./images/master-assol/2.png" alt="">
+                                   <img src="./images/master-assol/3.png" alt="">
+                              </div>
+                              <a href="#master_15" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 16 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/karina.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Карина</span>
+                                        <span>Стаж: 5 лет</span>
+                                        <p>«-волосковая техника (аппарат)<br>
+                                             -перманентный макияж бровей<br>
+                                             -перманентный макияж век<br>
+                                             -перманентный макияж губ<br>
+                                             -восстановление ареолы груди<br>
+                                             -камуфляж темных кругов под глазами<br>
+                                             -удаление перманентного макияжа лазером и ремувером»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-karina/1.png" alt="">
+                                   <img src="./images/master-karina/2.png" alt="">
+                                   <img src="./images/master-karina/3.png" alt="">
+                              </div>
+                              <a href="#master_16" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 17 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/anastasia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Анастасия</span>
+                                        <span>Стаж: более 10 лет</span>
+                                        <p>«В моем понимании перманентный макияж - это длительный макияж, созданный с
+                                             учетом индивидуальных особенностей и подчеркивающий красоту лица. Для меня
+                                             приоритет- это аккуратность в работе, ведь важна каждая мелочь в создании
+                                             полноценного образа. Я предлагаю вам не просто макияж, а совместную работу
+                                             над вашим образом. А залог отличного результата - это безболезненная
+                                             стирильная процедура, результат которой будет с вами долгое время.»
+                                        </p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-anastasia/1.png" alt="">
+                                   <img src="./images/master-anastasia/2.png" alt="">
+                                   <img src="./images/master-anastasia/3.png" alt="">
+                              </div>
+                              <a href="#master_17" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 18 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/alina.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Алина</span>
+                                        <span>Стаж: 4,5 года<br>
+                                             Количество - более 4000</span>
+                                        <p>«Награды: заняла 2ое место в международном конкурсе World Beauty Voyage PMU,
+                                             категория Джекпот в 2021г. Также 2-3 раза в год посещаю
+                                             мастер-классы/форумы по повышению квалификации у лучших мастеров и в самых
+                                             востребованных академиях России и Мира»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-alina/1.png" alt="">
+                                   <img src="./images/master-alina/2.png" alt="">
+                                   <img src="./images/master-alina/3.png" alt="">
+                              </div>
+                              <a href="#master_18" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+                    </div><!-- /.swiper-wrapper -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+               </div><!-- /.masters-slider -->
+
+               <div class="swiper masters-slider masters-slider-mobile">
+                    <div class="swiper-wrapper">
+                         <!-- 1 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/oksana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Оксана</span>
+                                        <span>Стаж: 6,5 лет</span>
+                                        <p>Более 6 лет я работаю в индустрии красоты и вхожу в топ 100 мастеров России
+                                             по перманентному макияжу!
+                                             Мои главные принципы в работе - это:<br>
+                                             -Постоянное развитие<br>
+                                             -Качество<br>
+                                             -️Подчеркивание уникальности и красоты каждой женщины</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-oksana/1.png" alt="">
+                                   <img src="./images/master-oksana/2.png" alt="">
+                                   <img src="./images/master-oksana/3.png" alt="">
+                              </div>
+                              <a href="#master_1" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 2 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/olga.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ольга</span>
+                                        <span>Стаж: более 7 лет</span>
+                                        <p>Работая с лицами девушек,женщин,я получаю огромное удовольствия от того,что я
+                                             помогаю им выглядеть красивыми и счастливыми,ведь перманентный макияж
+                                             решает главную проблему женщин-как остаться красивой и ухоженной 24 часа в
+                                             сутки)</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-olga/1.png" alt="">
+                                   <img src="./images/master-olga/2.png" alt="">
+                                   <img src="./images/master-olga/3.png" alt="">
+                              </div>
+                              <a href="#master_2" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 3 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/asya.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ася</span>
+                                        <span>Стаж: более 5 лет</span>
+                                        <p>Считаю, что всего должно быть в меру, и лицо - не исключение! Поэтому,
+                                             перманентный макияж предпочитаю естественный и натуральный.</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-asya/1.png" alt="">
+                                   <img src="./images/master-asya/2.png" alt="">
+                                   <img src="./images/master-asya/3.png" alt="">
+                              </div>
+                              <a href="#master_3" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 4 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/maria.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Мария</span>
+                                        <span>Стаж: 2 года</span>
+                                        <p>Сертифицированный мастер в области перманентного макияжа.<br>
+                                             За 3 года выполнила свыше 2500 тысяч процедур, прошла более 20 обучений у
+                                             ТОПовых мастеров!</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-maria/1.png" alt="">
+                                   <img src="./images/master-maria/2.png" alt="">
+                                   <img src="./images/master-maria/3.png" alt="">
+                              </div>
+                              <a href="#master_4" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 5 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/natalia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Наталия</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>Меня зовут Наталия и я мастер ПМ в студии MakeUpTattoo.Что могу сказать о
+                                             себе? Так или иначе моя жизнь всегда шла в параллели с искусством, а именно
+                                             с рисованием. Акварель, нейл арт, визаж, портреты... постепенно подводили к
+                                             перманентному макияжу, где наконец все сошлось! И теперь я воплощаю красоту
+                                             в жизнь!</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-natalia/1.png" alt="">
+                                   <img src="./images/master-natalia/2.png" alt="">
+                                   <img src="./images/master-natalia/3.png" alt="">
+                              </div>
+                              <a href="#master_5" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 6 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/evgenia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Евгения</span>
+                                        <span>Стаж: 7 лет, преподаватель</span>
+                                        <p>Практикующий мастер-бровист и мастер перманентного макияжа. Занимаюсь
+                                             дизайном бровей с окрашиванием краской и хной. Владею всеми методами
+                                             коррекции бровей (пинцет, воск, нить) <br>Имею опыт в преподавательской
+                                             сфере 2 года, тренер курсов по архитектуре бровей.</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-evgenia/1.png" alt="">
+                                   <img src="./images/master-evgenia/2.png" alt="">
+                                   <img src="./images/master-evgenia/3.png" alt="">
+                              </div>
+                              <a href="#master_6" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 7 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/julia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Юлия</span>
+                                        <span>Стаж: более 5 лет</span>
+                                        <p>Люблю свою работу и отдаюсь ей полностью. В моей профессии не существует
+                                             мелочей, важно всё! И отнюдь не на последнем месте чуткое отношение к
+                                             пожеланиям клиента и искренность в стремлении получить тот результат, на
+                                             который клиент рассчитывает. Ну, а взаимный обмен улыбками меняет наш мир к
+                                             лучшему!Всегда была уверена, что стану психологом (хотя мастер
+                                             перманентного макияжа – чем не психолог) верю в карму и силу мысли.</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-julia/1.png" alt="">
+                                   <img src="./images/master-julia/2.png" alt="">
+                                   <img src="./images/master-julia/3.png" alt="">
+                              </div>
+                              <a href="#master_7" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 9 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/kseniya.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ксения</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>Считаю, что качественный перманентный макияж это в первую очередь
+                                             естественность и гармоничность вашего образа. Для меня, как для мастера
+                                             перманентного макияжа, одной из самых главных задач является
+                                             профессиональный рост и улучшение своих навыков. Ведь чем больше ты
+                                             развиваешься, тем более качественной становится твоя работа!</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-kseniya/1.png" alt="">
+                                   <img src="./images/master-kseniya/2.png" alt="">
+                                   <img src="./images/master-kseniya/3.png" alt="">
+                              </div>
+                              <a href="#master_9" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 10 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/tatyana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Татьяна</span>
+                                        <span>Стаж: 4 года</span>
+                                        <p>«В моем понимании перманентный макияж - это эстетичный умеренный макияж,
+                                             подчеркивающий красоту лица.Обожаю свою работу, получаю удовольствие от
+                                             общения с людьми, эмпат. Клиенты говорят, что я заряжаю их своим
+                                             спокойствием.Люблю делать девушек красивее, наблюдать за вашими улыбками от
+                                             преображения в зеркале! Не люблю, когда работа выполняется ‘на поток’; я за
+                                             индивидуальный подход к клиентам.»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-tatyana/1.png" alt="">
+                                   <img src="./images/master-tatyana/2.png" alt="">
+                                   <img src="./images/master-tatyana/3.png" alt="">
+                              </div>
+                              <a href="#master_10" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 11 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/vasiliy.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Василий</span>
+                                        <span>Стаж: более 7 лет</span>
+                                        <p>«В работе всегда учитываю индивидуальные особенности каждой девушки,
+                                             предлагая свой мужской взгляд на женскую красоту. Во время процедуры
+                                             стараюсь обеспечить максимальный комфорт, применяю современные
+                                             нетравматичные техники, благодаря чему восстановление кожи проходит мягко,
+                                             без корочек, с шелушением. Я "за" естественность и максимально натуральный
+                                             вид перманентного макияжа, но обязательно учитываю мнение тех, кому хочется
+                                             поярче.»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-vasiliy/1.png" alt="">
+                                   <img src="./images/master-vasiliy/2.png" alt="">
+                                   <img src="./images/master-vasiliy/3.png" alt="">
+                              </div>
+                              <a href="#master_11" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 12 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/alla.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Алла</span>
+                                        <span>Стаж: более 5 лет</span>
+                                        <p>«Для меня главное в перманентном макияже - умеренность и естественность. Вот
+                                             уже более трёх лет я занимаюсь любимым делом, помогая раскрыть и
+                                             подчеркнуть красоту каждой своей клиентки. Перманентный макияж это ваша
+                                             безупречность в любых условиях, это ваше новое восприятие себя. Жизнь
+                                             слишком прекрасна, чтобы тратить время на нанесение косметики, хотите
+                                             попробовать?»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-alla/1.png" alt="">
+                                   <img src="./images/master-alla/2.png" alt="">
+                                   <img src="./images/master-alla/3.png" alt="">
+                              </div>
+                              <a href="#master_12" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 13 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/yana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Яна</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>«Предлагаю вам воспользоваться услугой и получить удовольствие, поменяться в
+                                             свою лучшую сторону и подчеркнуть индивидуальную красоту, а также с помощью
+                                             ПМ сэкономить время на повседневный макияж! В работе я всегда учитываю ваши
+                                             пожелания и предпочтения в окончательном результате, также помогу подобрать
+                                             форму и цвет (если сомневаетесь).»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-yana/1.png" alt="">
+                                   <img src="./images/master-yana/2.png" alt="">
+                                   <img src="./images/master-yana/3.png" alt="">
+                              </div>
+                              <a href="#master_13" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 14 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/svetlana.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Светлана</span>
+                                        <span>Стаж: 6 лет</span>
+                                        <p>«В работе для меня главное не нарисовать новое лицо, а подчеркнуть
+                                             индивидуальность и скрыть недостатки. Несколько фактов обо мне. В детстве
+                                             себе и всем куклам рисовала макияж, используя мамину косметичку (наверно,
+                                             она была очень рада).»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-svetlana/1.png" alt="">
+                                   <img src="./images/master-svetlana/2.png" alt="">
+                                   <img src="./images/master-svetlana/3.png" alt="">
+                              </div>
+                              <a href="#master_14" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 15 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/assol.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Ассоль</span>
+                                        <span>Стаж: 6 лет</span>
+                                        <p>«Считаю абсолютно всех женщин красивыми. В каждой своя изюминка, в каждой
+                                             своя уникальная черта, отличающая нас друг от друга, и выделяющая на фоне
+                                             всех остальных. Задача мастера - увидеть эту уникальность, и подчеркнуть
+                                             её, не нарушив, при этом, естественности и натуральности. К сожалению,
+                                             женщина сегодня выполняет сотни функций одновременно, и не всегда имеет
+                                             возможность ежедневно уделять внимание и время своей внешности.»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-assol/1.png" alt="">
+                                   <img src="./images/master-assol/2.png" alt="">
+                                   <img src="./images/master-assol/3.png" alt="">
+                              </div>
+                              <a href="#master_15" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 16 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/karina.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Карина</span>
+                                        <span>Стаж: более 6 лет</span>
+                                        <p>«-волосковая техника (аппарат)<br>
+                                             -перманентный макияж бровей<br>
+                                             -перманентный макияж век<br>
+                                             -перманентный макияж губ<br>
+                                             -восстановление ареолы груди<br>
+                                             -камуфляж темных кругов под глазами<br>
+                                             -удаление перманентного макияжа лазером и ремувером»</p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-karina/1.png" alt="">
+                                   <img src="./images/master-karina/2.png" alt="">
+                                   <img src="./images/master-karina/3.png" alt="">
+                              </div>
+                              <a href="#master_16" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 17 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/anastasia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Анастасия</span>
+                                        <span>Стаж: более 10 лет</span>
+                                        <p>«В моем понимании перманентный макияж - это длительный макияж, созданный с
+                                             учетом индивидуальных особенностей и подчеркивающий красоту лица. Для меня
+                                             приоритет- это аккуратность в работе, ведь важна каждая мелочь в создании
+                                             полноценного образа. Я предлагаю вам не просто макияж, а совместную работу
+                                             над вашим образом. А залог отличного результата - это безболезненная
+                                             стирильная процедура, результат которой будет с вами долгое время.»
+                                        </p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-anastasia/1.png" alt="">
+                                   <img src="./images/master-anastasia/2.png" alt="">
+                                   <img src="./images/master-anastasia/3.png" alt="">
+                              </div>
+                              <a href="#master_17" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+
+                         <!-- 18 -->
+                         <div class="swiper-slide">
+                              <div class="row">
+                                   <div class="avatar">
+                                        <img src="./images/anastasia.png" alt="">
+                                   </div>
+                                   <div class="text">
+                                        <span>Алина</span>
+                                        <span>Стаж: 4,5 года<br>
+                                             Количество - более 4000</span>
+                                        <p>«Заняла 2ое место в международном конкурсе World Beauty Voyage PMU, категория
+                                             Джекпот в 2021г. Также 2-3 раза в год посещаю мастер-классы/форумы по
+                                             повышению квалификации у лучших мастеров и в самых востребованных академиях
+                                             России и Мира»
+                                        </p>
+                                   </div>
+                              </div>
+                              <div class="row image-row">
+                                   <img src="./images/master-alina/1.png" alt="">
+                                   <img src="./images/master-alina/2.png" alt="">
+                                   <img src="./images/master-alina/3.png" alt="">
+                              </div>
+                              <a href="#master_18" class="modal-btn transparent-bg">Посмотреть все работы </a>
+                         </div><!-- /.slide -->
+                    </div><!-- /.swiper-wrapper -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+               </div><!-- /.masters-slider -->
+
+               <a href="javascript://" class="stepform_fT408fA rnd_917519014 btn">Выбрать мастера</a>
+          </section>
+
+          <section class="benefits">
+               <h6>ПОЛУЧИТЕ УДОВОЛЬСТВИЕ ОТ ПРОВЕДЕННОЙ ПРОЦЕДУРЫ</h6>
+               <div class="benefits-grid">
+                    <div class="card">
+                         <div class="card-header">
+                              <span class="number">1/3</span>
+                              <span class="card-title">Это не больно</span>
+                         </div>
+                         <div class="row">
+                              <p>Используем двухфазную анестезию, что делает процедуру максимально комфортной</p>
+                              <img src="./images/benefit-1.png" alt="">
+                         </div>
+                    </div>
+
+                    <div class="card">
+                         <div class="card-header">
+                              <span class="number">2/3</span>
+                              <span class="card-title">Это естественно</span>
+                         </div>
+                         <div class="row">
+                              <p>Никто не заметит, что у вас перманентый макияж, а со временем перманентный макияж
+                                   бледнеет и сходит на нет (через 2-3 года)</p>
+                              <img src="./images/benefit-2.png" alt="">
+                         </div>
+                    </div>
+
+                    <div class="card">
+                         <div class="card-header">
+                              <span class="number">3/3</span>
+                              <span class="card-title">Безопасная процедура</span>
+                         </div>
+                         <p>Используем только одноразовыее и безопасные расходные материалы, которые вскрываются при
+                              клиенте на процедуре</p>
+                         <img src="./images/benefit-3.png" alt="">
+                    </div>
+               </div><!-- /.benefits-grid -->
+               <div class="text">Хотите попробовать перманентный макияж, но не знаете что вам лучше подойдет? — оставьте
+                    заявку и мы поможем с выбором</div>
+               <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Хочу попробовать</a>
+          </section>
+
+          <section class="portfolio" id="portfolio">
+               <h6>УЗНАЕМ КАЖДУЮ КЛИЕНТКУ ПО ЕСТЕСТВЕННЫМ БРОВЯМ И ГУБАМ</h6>
+               <div class="swiper portfolio-slider">
+                    <div class="swiper-wrapper">
+                         <div class="swiper-slide">
+                              <img src="./images/portfolio-1.png" alt="">
+                              <img src="./images/portfolio-2.png" alt="">
+                              <img src="./images/portfolio-3.png" alt="">
+                         </div>
+                         <div class="swiper-slide">
+                              <img src="./images/portfolio-4.png" alt="">
+                              <img src="./images/portfolio-5.png" alt="">
+                              <img src="./images/portfolio-6.png" alt="">
+                         </div>
+                         <div class="swiper-slide">
+                              <img src="./images/portfolio-7.png" alt="">
+                              <img src="./images/portfolio-8.png" alt="">
+                              <img src="./images/portfolio-9.png" alt="">
+                         </div>
+                         <div class="swiper-slide">
+                              <img src="./images/portfolio-10.png" alt="">
+                              <img src="./images/portfolio-11.png" alt="">
+                              <img src="./images/portfolio-12.png" alt="">
+                         </div>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+               </div><!-- /.portfolio-slider -->
+               <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Хочу выглядеть также естественно и
+                    красиво</a>
+          </section>
+
+          <section class="stages">
+               <h6>3 ШАГА,ЧТОБЫ ВЫГЛЯДЕТЬ РОСКОШНО И УВЕРЕННО В ЛЮБОЙ СИТУАЦИИ</h6>
+               <ul>
+                    <li>Дома</li>
+                    <li>На работе</li>
+                    <li>С друзьями</li>
+                    <li>С любимым мужчиной</li>
+               </ul>
+               <div class="stages-grid">
+                    <div class="stage">
+                         <img src="./images/consult.png" alt="">
+                         <p>Приходите на консультацию к выбранному мастеру, примерьте эскиз будушего макияжа и пройдите
+                              процедуру</p>
+                    </div>
+                    <div class="stage">
+                         <img src="./images/gift.png" alt="">
+                         <p>Получите в подарок средство и рекомендации по уходу, чтобы заживление прошло комфортно</p>
+                    </div>
+                    <div class="stage">
+                         <img src="./images/correction.png" alt="">
+                         <p>Приходите на дополнительную процедуру коррекции для закрепления результата</p>
+                    </div>
+               </div>
+               <div class="text">— Перманентый макияж держится до 3-х лет<br> — Не нужно постоянно подкрашивать
+                    косметикой</div>
+               <div class="banner">
+                    «Это действительно то, что я хотела»
+                    <img src="./images/portfolio-9.png" alt="">
+               </div>
+          </section>
+          <!-- OLEG -->
+          <section class="slider-block">
+               <h2>ДЛЯ ВАС В СТУДИИ ДЕЙСТВУЮТ СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h2>
+               <div class="slider-main">
+                    <img src="images/left-slider-btn.png" alt="" id="left-btn">
+                    <div class="slider-box">
+                         <div class="slider-item"></div>
+                         <div class="slider-item">
+                              <img src="images/item1.png" alt="">
+                              <h5>Перманент за 4.500₽</h5>
+                              <p>Перманент за 4.500 ₽ любой зоны на<br class="br-mobile"> выбор по будням до 18:00.</p>
+                         </div>
+                         <div class="slider-item">
+                              <img src="images/item2.png" alt="">
+                              <h5>Подарок именинникам</h5>
+                              <p>3 дня до дня рождения и 3 дня после,<br class="br-mobile"> скидка 10% на все услуги.
+                              </p>
+                         </div>
+                         <div class="slider-item">
+                              <img src="images/item3.png" alt="">
+                              <h5>MakeUp Day</h5>
+                              <p>Отрисовка эскиза, подбор цвета,<br> фуршет и Party. Всё это каждые<br> выходные в Make
+                                   Up Tattoo</p>
+                         </div>
+                         <div class="slider-item">
+                              <img src="images/item4.png" alt="">
+                              <h5>Коррекция пополам</h5>
+                              <p>-50% на коррекцию перманентного<br class="br-mobile"> макияжа.</p>
+                         </div>
+                    </div>
+                    <img src="images/right-slider-btn.png" alt="" id="right-btn">
+               </div>
+               <script>
+                    var leftBtn = document.getElementById('left-btn'),
+                         rightBtn = document.getElementById('right-btn'),
+                         slide = document.querySelectorAll('.slider-item'),
+                         activeSlideOne = 1,
+                         activeSlideTwo = 2;
+
+                    slide[activeSlideOne].classList.add('active-slide');
+                    slide[activeSlideTwo].classList.add('active-slide');
+                    var lenghtArr = slide.length - 1;
+
+                    rightBtn.addEventListener('click', () => {
+                         if (activeSlideTwo == lenghtArr) {
+                              slide[activeSlideTwo].classList.remove('active-slide');
+                              activeSlideTwo = 1;
+                              slide[activeSlideTwo].classList.add('active-slide');
+                         }
+                         slide[activeSlideOne].classList.remove('active-slide');
+                         slide[activeSlideTwo].classList.remove('active-slide');
+                         activeSlideOne = activeSlideTwo;
+                         activeSlideTwo = activeSlideTwo + 1;
+                         slide[activeSlideOne].classList.add('active-slide');
+                         slide[activeSlideTwo].classList.add('active-slide');
+
+                    });
+
+                    leftBtn.addEventListener('click', () => {
+                         if (activeSlideOne == 1) {
+                              slide[activeSlideOne].classList.remove('active-slide');
+                              activeSlideOne = 4;
+                              slide[activeSlideOne].classList.add('active-slide');
+                         }
+                         slide[activeSlideOne].classList.remove('active-slide');
+                         slide[activeSlideTwo].classList.remove('active-slide');
+                         activeSlideTwo = activeSlideOne;
+                         activeSlideOne = activeSlideOne - 1;
+                         slide[activeSlideOne].classList.add('active-slide');
+                         slide[activeSlideTwo].classList.add('active-slide');
+
+                    });
+               </script>
+          </section>
+          <!-- OLEG -->
+          <section class="our-studios" id="our-studios">
+               <h6>ПЕРМАНЕНТНЫЙ МАКИЯЖ ОТ 6 000 РУБЛЕЙ С СОХРАНЕНИЕМ ЕСТЕСТВЕННОСТИ ДО 3-Х ЛЕТ</h6>
+               <div class="subtitle">Для вас работают 17 мастеров в 2 студиях MakeupTattoo в Москве:</div>
+               <div class="row">
+                    <div class="card">
+                         <p class="title">На Проспекте Вернадского 42к2</p>
+                         <b>Руководитель студий</b>
+                         <p>Анастастия <span>20 000 Р</span></p>
+                         <b>ТОП-мастера</b>
+                         <p>Наталия <span>12 000 Р</span></p>
+                         <p>Карина <span>8 000 - 10 000 Р</span></p>
+                         <b>Ведущие мастера</b>
+                         <p>Ольга <span>8 000 Р</span></p>
+                         <p>Ассоль <span>8 000 Р</span></p>
+                         <p>Евгения <span>8 000 Р</span></p>
+                         <p>Ася <span>8 000 Р</span></p>
+                         <b>Сертифицированные мастера</b>
+                         <p>Татьяна<span>8 000 Р</span></p>
+                         <p>Мария<span>6 000 Р</span></p>
+                         <p>Оксана<span>8 000-10 000 Р</span></p>
+                         <a href="javascript://" class="stepform_fT408fA rnd_917519014 btn">Выбрать мастера</a>
+                    </div>
+                    <div class="card">
+                         <p class="title">На Дербеневской Набережной 11в</p>
+                         <b>ТОП-мастера</b>
+                         <p>Светлана <span>12 000 Р</span></p>
+                         <p>Марина <span>15 000 Р</span></p>
+                         <p>Юлия <span>10 000 Р</span></p>
+                         <b>Ведущие мастера</b>
+                         <p>Ксения <span>8 000 Р</span></p>
+                         <p>Василий <span>8 000 Р</span></p>
+                         <p>Алла <span>8 000 Р</span></p>
+                         <b>Сертифицированные мастера</b>
+                         <p>Тина<span>8 000 Р</span></p>
+                         <p>Яна <span>6 000 Р</span></p>
+                         <p>Алина <span>6 000 Р</span></p>
+                         <a href="javascript://" class="stepform_fT408fA rnd_917519014 btn">Выбрать мастера</a>
+                    </div>
+               </div>
+
+               <div class="pricelist">
+                    <div class="title">Фиксированная стоимость отдельных услуг</div>
+                    <div class="row">
+                         <div>
+                              <span>Волосковая техника</span>
+                              <span>Ареолы груди</span>
+                              <span>Перекрытие старого татуажа</span>
+                              <span>Коррекция в период 1-3 месяца</span>
+                              <span>Рефреш для наших клиентов</span>
+                              <span>Лазерное даление</span>
+                              <span>Удаление ремувером</span>
+                              <span>Снятие нарощенных ресниц</span>
+                              <span>Мушка</span>
+                              <span>Карбоновый пиллинг</span>
+                         </div>
+                         <div>
+                              <span>10 000 Р</span>
+                              <span>10 000 Р</span>
+                              <span>+2 000 Р</span>
+                              <span>-50% от первичной процедуры</span>
+                              <span>-2 000 Р от прайса мастера</span>
+                              <span>3 500 Р</span>
+                              <span>5 000 Р</span>
+                              <span>500 Р</span>
+                              <span>1 500 Р</span>
+                              <span>3 000 р</span>
+                         </div>
+                    </div>
+                    <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Записаться на консультацию</a>
+               </div>
+          </section>
+          <button class="js_iframe_widget" type="button">Приобрести сертефикат</button>
+          <!-- ТУТ ТУТ ТУТ -->
+          <section class="consult-form">
+               <h6>ЧУВСТВУЙТЕ УВЕРЕННОСТЬ В КАЖДОМ СВОЕМ ШАГЕ</h6>
+               <div class="row">
+                    <div>
+                         <div class="subtitle">Запишитесь на подбор формы и отрисовку эскиза</div>
+                         <p>Во время бесплатной консультации вы поймете:<br>
+                              — как изменится лицо с новым макияжем<br>
+                              — комфортно ли вам общаться с мастером</p>
+                         <p>По статистике и отзывам наших клиенток, перманентый макияж делает их на несколько лет моложе
+                         </p>
+                    </div>
+                    <div class="stepform_LhAGcyr rnd_917559884"></div>
+                    <script>
+                         (function (s, t, e, p, f, o, r, m) {
+                              s[t] = s[t] || {};
+                              s[t][917559884] = {
+                                   id: "LhAGcyr",
+                                   rnd: 917559884
+                              };
+                              e.async = true;
+                              e.src = p + f;
+                              document[m](o)[r](e)
+                         }(window, "stepFORM_params", document.createElement("script"), document.location
+                              .protocol === "https:" ? "https:" : "http:",
+                              "//u013641.stepform.io/api.js?id=LhAGcyr", "head", "appendChild", "querySelector"));
+                    </script>
+               </div>
+          </section>
+
+          <!-- <section class="video-review" id="video-review">
+               <h6>ПОСМОТРИТЕ ВИДЕООБЗОРЫ И ОТЗЫВЫ О РАБОТЕ СТУДИИ</h6>
+               <div class="video-wrap">
+                    <img src="./images/video-review.png" alt="">
+               </div>
+          </section> -->
+
+          <section class="faq" id="faq">
+               <h6>НЕ НАШЛИ ОТВЕТ НА СВОЙ ВОПРОС?</h6>
+               <div class="subtitle">Оставьте заявку и наш администратор с вами свяжется</div>
+               <div class="faq-wrap">
+                    <button>Это точно не больно?</button>
+                    <div class="answer">Болезненность процедуры зависит от болевого порога клиента. Для женщин важную
+                         роль играет день цикла, усталость, прием лекарственных препаратов и другие внешние и внутренние
+                         факторы. Перед процедурой мастер проводит местную анестезию, при необходимости повторяет ее в
+                         течение сеанса. Благодаря современным аппаратам, щадящим техникам и качественным анестезирующим
+                         препаратам специалистам удается свести болевые ощущения к минимуму.</div>
+               </div><!-- /.faq-wrap -->
+
+               <div class="faq-wrap">
+                    <button>Сколько времени займет процедура?</button>
+                    <div class="answer">Время сеанса рассчитывается индивидуально и зависит от выбранного участка и
+                         техники нанесения перманентного макияжа (косметического татуажа). В среднем процедура занимает
+                         от 1,5 до 3 часов. В это время входит:<br>
+                         - консультация,<br>
+                         - заполнение документации,<br>
+                         - создание эскиза,<br>
+                         - анестезия и подготовка к процедуре,<br>
+                         - нанесение макияжа.</div>
+               </div><!-- /.faq-wrap -->
+
+               <div class="faq-wrap">
+                    <button>Сколько держится эффект перманентного макияжа?</button>
+                    <div class="answer">Перманентный макияж держится от года до трех лет. Минимальный срок службы
+                         перманентного макияжа бровей – 12 месяцев. Дольше всего сохраняется пигмент, нанесенный на
+                         глаза.</div>
+               </div><!-- /.faq-wrap -->
+
+               <div class="faq-wrap">
+                    <button>Безопасен ли процесс проведения процедуры?</button>
+                    <div class="answer">Процесс процедуры безопасен. Игла стерильная, одноразовая, вскрывается при
+                         клиенте. Пигмент наносится на верхние слои дермо, очень поверхностно и не проникает глубоко (не
+                         достает до луковицы волоска) - это не вредно.</div>
+               </div><!-- /.faq-wrap -->
+
+               <div class="faq-wrap">
+                    <button>Зачем через 1 месяц нужна коррекция?</button>
+                    <div class="answer">Для того, чтобы пигмент лучше держался. Также на коррекции можно доработать
+                         результат - сделать его ярче, более выраженный градиент, скорректировать по цвету или форме,
+                         оценить уже заживший результат.</div>
+               </div><!-- /.faq-wrap -->
+
+               <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Задать вопрос</a>
+          </section>
+
+          <section class="contacts" id="contacts">
+               <h6>ИЛИ СВЯЖИТЕСТЬ ЛЮБЫМ УДОБНЫМ ДЛЯ ВАС СПОСОБОМ</h6>
+               <div class="row">
+                    <div class="map">
+                         <iframe
+                              src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa167652ee19aedd147066cce0835325c0d1d013c511003092d80aa6cdbb49d78&amp;source=constructor"
+                              width="680" height="520" frameborder="0"></iframe>
+                    </div>
+                    <div class="text">
+                         <address>Москва: <span class="underline">Пр-т Вернадского 42к2</span> и <span
+                                   class="underline">Дербеневская Набережная 11В</span><br> Работаем ежедневно с 10:00
+                              до 21:00</address>
+                         <div class="social-links">
+                              <a href="https://vk.com/makeuptattoostudio" target="_blank"><img src="./images/VK.png"
+                                        alt=""></a>
+                              <a href="https://wa.me/79774534400" target="_blank"><img src="./images/whatsapp.png"
+                                        alt=""></a>
+                         </div>
+                    </div>
+               </div>
+          </section>
+
+          <footer class="site-footer">
+               <div class="footer-top">
+                    <div class="site-branding">
+                         MAKEUP<br>TATTOO
+                         <span>Студия перманентного макияжа</span>
+                    </div>
+
+                    <nav>
+                         <a href="#reviews">Отзывы</a>
+                         <a href="#our-studios">Цены</a>
+                         <a href="#technology">Перечень услуг</a>
+                         <a href="#video-review">О студии</a>
+                         <a href="#faq">Вопросы</a>
+                         <a href="#work-of-masters">Мастера</a>
+                         <a href="#contacts">Как добраться</a>
+                    </nav>
+
+                    <div class="schedule-wrap">
+                         <address>Москва: <span class="underline">Пр-т Вернадского 42к2</span> и <span
+                                   class="underline">Дербеневская Набережная 11В</span><br> <span
+                                   class="schedule">Работаем ежедневно с 10:00 до 21:00</span></address>
+                    </div>
+
+                    <div class="phone-wrap">
+                         <a href="tel:+7(495) 185-56-56">+7(495) 185-56-56</a>
+                         <a href="javascript://" class="stepform_LhAGcyr rnd_917545341 btn">Перезвонить вам?</a>
+                    </div>
+               </div>
+               <div class="footer-bottom">
+                    <span>ООО "Идеал Групп"</span>
+                    <span>ОГРН 1137746953970</span>
+                    <span>ИНН 7710949597</span></div>
+          </footer>
+     </div>
+
+     <!-- Modal -->
+     <div class="modal">
+          <!-- Technology -->
+          <div class="modal-body modal-technology" id="technology_1"></div>
+          <div class="modal-body modal-technology" id="technology_2"></div>
+          <div class="modal-body modal-technology" id="technology_3"></div>
+          <div class="modal-body modal-technology" id="technology_4"></div>
+
+          <!-- Main form -->
+          <div class="modal-body modal-form" id="modal-form">
+               <div class="close" title="Закрыть">X</div>
+
+               <form action="">
+                    <div class="form-title">Заполните данные ниже и в течение 15 минут с вами свяжется администратор,
+                         чтобы подобрать вам мастера</div>
+                    <input type="text" placeholder="Как вас зовут?">
+                    <input type="text" class="tel" placeholder="Номер телефона для связи">
+                    <input type="submit" value="Записаться на консультацию">
+                    <small>Даю согласие на обработку моих <a href="#">персональных данных</a></small>
+               </form>
+          </div>
+
+          <!-- Masters form -->
+          <div class="modal-body modal-form" id="modal-form-master">
+               <form action="">
+                    <div class="close" title="Закрыть">X</div>
+                    <div class="form-title">Заполните данные ниже и в течение 15 минут с вами свяжется администратор,
+                         чтобы подобрать вам мастера</div>
+                    <input type="text" placeholder="Как вас зовут?">
+                    <input type="text" class="tel" placeholder="Номер телефона для связи">
+                    <select name="masters" id="masters">
+                         <option selected disabled>Выбрать мастера</option>
+                         <option value="Оксана">Оксана</option>
+                         <option value="Ольга">Ольга</option>
+                         <option value="Ася">Ася</option>
+                         <option value="Мария">Мария</option>
+                         <option value="Наталия">Наталия</option>
+                         <option value="Евгения">Евгения</option>
+                         <option value="Юлия">Юлия</option>
+                         <option value="Ксения">Ксения</option>
+                         <option value="Татьяна">Татьяна</option>
+                         <option value="Василий">Василий</option>
+                         <option value="Алла">Алла</option>
+                         <option value="Яна">Яна</option>
+                         <option value="Светлана">Светлана</option>
+                         <option value="Ассоль">Ассоль</option>
+                         <option value="Карина">Карина</option>
+                         <option value="Анастасия">Анастасия</option>
+                    </select>
+                    <input type="submit" value="Записаться на консультацию">
+                    <small>Даю согласие на обработку моих <a href="#">персональных данных</a></small>
+               </form>
+          </div>
+
+          <!-- Video -->
+          <div class="modal-body modal-video" id="modal-video">
+               <div class="close" title="Закрыть">X</div>
+               <iframe width="560" height="315" src="https://www.youtube.com/embed/kSR_VePdq4o"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
+          <div class="modal-bg" title="Закрыть"></div>
+     </div>
+
+     <script src="js/jquery-2.1.1.js"></script>
+     <script src="js/jquery.mobile.custom.min.js"></script> <!-- Resource jQuery -->
+     <script src="js/mains.js"></script> <!-- Resource jQuery -->
+   
+    
+     <script type="text/javascript" src="https://makeuptattoo.digift.ru/script"></script>
+     <script type="text/javascript">
+          document.addEventListener("DOMContentLoaded", function () {
+               IframeWidgetFunctional.init('.js_iframe_widget');
+          });
+     </script>
+</body>
+
+</html>
